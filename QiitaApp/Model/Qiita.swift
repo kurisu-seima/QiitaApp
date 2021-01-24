@@ -9,9 +9,9 @@ import Foundation
 
 struct Qiita: Codable {
     
-    var title: String
-    var likes_count: Int
-    var userName: String
-    var profileImageURL: String
-    var websiteURL: String
+    var title: String?
+    var likes_count: Int?
+    var userName: String?
+    var profileImageURL: String?
+    var websiteURL: String?
 }
