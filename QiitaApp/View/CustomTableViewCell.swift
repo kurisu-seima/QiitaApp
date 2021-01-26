@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class CustomTableViewCell: UITableViewCell {
 
@@ -25,9 +26,14 @@ class CustomTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setUp(index: Int) {
-        articleTitle.text = QiitaManager.shared.Qiitas[index].title
-        userName.text = QiitaManager.shared.Qiitas[index].userName
-        likesCount.text = "ライク数：\(String(QiitaManager.shared.Qiitas[index].likes_count!))"
+    func setUp(qiitas: [Qiita], index: Int) {
+        articleTitle.text = qiitas[index].title
+        likesCount.text = String(qiitas[index].likes_count!)
+        userName.text = qiitas[index].userName
+//        articleTitle.text = (qiitaData[index]["title"] as! String)
+//        let user = qiitaData[index]["user"] as! [String: Any]
+//        userName.text = (user["name"] as! String)
+//        likesCount.text = "ライク数：\(String((qiitaData[index]["likes_count"] as! Int)))"
+//        self.userProfileImage.af.setImage(withURL: user["profile_image_url"] as! URL)
     }
 }

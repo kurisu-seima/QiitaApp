@@ -9,4 +9,6 @@ target 'QiitaApp' do
 
 pod 'Alamofire', '~> 5.2'
 
+pod 'AlamofireImage', '~> 4.1'
+
 end
