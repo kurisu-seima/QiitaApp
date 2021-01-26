@@ -32,13 +32,13 @@ class TopViewController: UIViewController {
                 
                 for data in responseJsonData {
                     var qiita = Qiita()
-                    qiita.title = (data["title"] as? String) ?? "No title"
+                    qiita.title = data["title"] as? String
                     qiita.likes_count = (data["likes_count"] as? Int) ?? 0
+                    qiita.websiteURL = (data["url"] as? String) ?? ""
                     
                     if let user = data["user"] as? [String: Any] {
                         qiita.userName = user["name"] as? String ?? "No name"
                         qiita.profileImageURL = user["profile_image_url"] as? String ?? ""
-                        qiita.websiteURL = user["website_url"] as? String ?? ""
                     }
                     qiitas.append(qiita)
                 }
@@ -63,5 +63,11 @@ extension TopViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 86
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "WebVC") as! WebViewController
+        nextVC.urlString = qiitas[indexPath.row].websiteURL
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

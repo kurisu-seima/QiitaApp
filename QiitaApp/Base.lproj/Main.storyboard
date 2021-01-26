@@ -93,6 +93,40 @@
             </objects>
             <point key="canvasLocation" x="763.768115942029" y="93.75"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="a4D-CF-1LS">
+            <objects>
+                <viewController storyboardIdentifier="WebVC" id="4PJ-aE-O83" customClass="WebViewController" customModule="QiitaApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="94y-Sb-GhB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhd-2d-MOX">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kn0-Rs-NUu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xhd-2d-MOX" firstAttribute="top" secondItem="Kn0-Rs-NUu" secondAttribute="top" id="Q6f-7N-5AS"/>
+                            <constraint firstItem="xhd-2d-MOX" firstAttribute="leading" secondItem="Kn0-Rs-NUu" secondAttribute="leading" id="R3F-Wo-J6q"/>
+                            <constraint firstAttribute="bottom" secondItem="xhd-2d-MOX" secondAttribute="bottom" id="kNL-ll-HoB"/>
+                            <constraint firstItem="xhd-2d-MOX" firstAttribute="trailing" secondItem="Kn0-Rs-NUu" secondAttribute="trailing" id="mJg-74-48R"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="xhd-2d-MOX" id="xPb-jA-WK6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dk9-Gh-77i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1631.8840579710147" y="93.75"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="uGF-Cv-Usp">
             <objects>
