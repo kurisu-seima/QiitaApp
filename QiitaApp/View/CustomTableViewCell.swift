@@ -28,12 +28,15 @@ class CustomTableViewCell: UITableViewCell {
     
     func setUp(qiitas: [Qiita], index: Int) {
         articleTitle.text = qiitas[index].title
-        likesCount.text = String(qiitas[index].likes_count!)
-        userName.text = qiitas[index].userName
-//        articleTitle.text = (qiitaData[index]["title"] as! String)
-//        let user = qiitaData[index]["user"] as! [String: Any]
-//        userName.text = (user["name"] as! String)
-//        likesCount.text = "ライク数：\(String((qiitaData[index]["likes_count"] as! Int)))"
-//        self.userProfileImage.af.setImage(withURL: user["profile_image_url"] as! URL)
+        likesCount.text = "ライク数：\(String(qiitas[index].likes_count))"
+        if qiitas[index].userName == "" {
+            userName.text = "No name"
+        } else {
+            userName.text = qiitas[index].userName
+        }
+
+        if let profileURL = URL(string: qiitas[index].profileImageURL) {
+            userProfileImage.af.setImage(withURL: profileURL, placeholderImage:UIImage(named: "No Image Icon"))
+        }
     }
 }

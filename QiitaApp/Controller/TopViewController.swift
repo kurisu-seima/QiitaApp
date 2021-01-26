@@ -11,14 +11,8 @@ import Alamofire
 class TopViewController: UIViewController {
 
     @IBOutlet weak var qiitaTableView: UITableView!
-    
-    var qiitas: [Qiita] = [Qiita(title: "早く転職したい", likes_count: 10, userName: "seima", profileImageURL: nil, websiteURL: nil)]
-    
-//    var qiitaData: [[String: Any]] = [] {
-//        didSet {
-//            qiitaTableView.reloadData()
-//        }
-//    }
+
+    var qiitas: [Qiita] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,19 +20,34 @@ class TopViewController: UIViewController {
         qiitaTableView.dataSource = self
         qiitaTableView.delegate = self
         
-//        request()
+        request()
     }
     
-//    func request() {
-    //        AF.request("https://qiita.com/api/v2/items").responseJSON {_ in
-//            [self] respons in
-//            let responsDataArray = try! JSONSerialization.jsonObject(with: respons.data!, options: JSONSerialization.ReadingOptions.allowFragments) as! [Any]
-//            let responsData = responsDataArray.map { (data) -> [String: Any] in
-//                return data as! [String: Any]
-//            }
-//            qiitaData = responsData
-//        }
-//    }
+    func request() {
+        AF.request("https://qiita.com/api/v2/items").responseJSON { [self] respons in
+            do {
+                guard let responseJsonData = try JSONSerialization.jsonObject(with: respons.data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [[String: Any]] else {
+                    return
+                }
+                
+                for data in responseJsonData {
+                    var qiita = Qiita()
+                    qiita.title = (data["title"] as? String) ?? "No title"
+                    qiita.likes_count = (data["likes_count"] as? Int) ?? 0
+                    
+                    if let user = data["user"] as? [String: Any] {
+                        qiita.userName = user["name"] as? String ?? "No name"
+                        qiita.profileImageURL = user["profile_image_url"] as? String ?? ""
+                        qiita.websiteURL = user["website_url"] as? String ?? ""
+                    }
+                    qiitas.append(qiita)
+                }
+                qiitaTableView.reloadData()
+            } catch {
+                print("error in JSONSerialization", error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension TopViewController: UITableViewDataSource, UITableViewDelegate {
@@ -56,5 +65,3 @@ extension TopViewController: UITableViewDataSource, UITableViewDelegate {
         return 86
     }
 }
-
-
